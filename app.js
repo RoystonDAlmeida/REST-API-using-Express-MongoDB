@@ -1,17 +1,22 @@
 import mongodb from 'mongodb'
 import express from 'express'
+import { config } from 'dotenv'
 
 // Creating an app instance
 const app=express()
 const port=3000
+
+// Load environment variables
+config();
+
 app.listen(port,()=>{
   console.log(`Server active on Port:${port}`)
 })
 
 // Connecting Express with MongoDB
 const { MongoClient, ObjectId } = mongodb
-const URI="mongodb://localhost:27017"
-const client=new MongoClient(URI)
+const URI = process.env.MONGODB_CONNECTION_URL;
+const client = new MongoClient(URI)
 
 // Database name
 const dbname='BookDB'
